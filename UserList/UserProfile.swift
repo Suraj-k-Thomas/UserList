@@ -8,7 +8,7 @@
 import Foundation
 
 public struct USerProfile : Equatable , Codable , Identifiable{
-    public   let id: UUID
+    public   let id: Int
     public   let name: String
     public   let company: String
     public   let username: String

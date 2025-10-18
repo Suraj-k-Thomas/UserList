@@ -32,7 +32,7 @@ class UserListTests :XCTestCase{
     func  test_ThrowsErrorOnClinetError () async {
         
         let (sut , client) = makesut()
-        await client.enqueue(response: .failure(NSError(domain: "error", code: 0, userInfo: nil)))
+        await client.enqueue(response: .failure(URLError(.notConnectedToInternet)))
         
         do {
           _ =  try await sut.load()
@@ -89,10 +89,10 @@ class UserListTests :XCTestCase{
         let url = URL(string: "https://Aurl.com")!
         let (sut , client) = makesut(url: url)
         
-        let item = USerProfile(id: UUID() , name: "someName", company: "someCompany", username: "someUSername", email: "https://someemail.com", address: "someaddress", zip: "12345", state: "somestate", country: "somecountry", phone:"1234587656" , photo: "https://somephoto.com")
+        let item = USerProfile(id: 1 , name: "someName", company: "someCompany", username: "someUSername", email: "https://someemail.com", address: "someaddress", zip: "12345", state: "somestate", country: "somecountry", phone:"1234587656" , photo: "https://somephoto.com")
         
         let json = [[
-            "id": item.id.uuidString,
+            "id": item.id,
                 "name": item.name,
                 "company": item.company,
                 "username": item.username,
