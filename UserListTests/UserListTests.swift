@@ -41,14 +41,35 @@ class UserListTests :XCTestCase{
         }
         catch  let error as UsersList.Error {
             
-            XCTAssertEqual(error ,UsersList.Error.connectivity)
+            XCTAssertEqual(error ,.connectivity)
+        }
+        catch{
+            XCTFail("error")
+        }
+    }
+    
+    
+    func  test_ThrowsErrorOnNon200HTTPURLResponse () async {
+        let url = URL(string: "https://Aurl.com")!
+        let (sut , client ) = makesut(url: url)
+        let badresponse = HTTPURLResponse(url: url, statusCode: 400, httpVersion: nil, headerFields:nil)!
+        await client.enqueue(response: .success(Data(),badresponse))
+        do {
+          _ =  try await sut.load()
+            XCTFail("passed")
+            
+        }
+        catch  let error as UsersList.Error {
+            
+            XCTAssertEqual(error ,.invalidResponse)
         }
         catch{
             XCTFail("error")
         }
         
-        
     }
+    
+    
     
     
     //Helpers
@@ -62,11 +83,6 @@ class UserListTests :XCTestCase{
     }
 }
 
-
-protocol HTTPClient {
-    
-    func get(from url : URL) async throws -> (Data , HTTPURLResponse)
-}
 
 
 actor ClientSpy : HTTPClient {
@@ -101,32 +117,3 @@ actor ClientSpy : HTTPClient {
 }
 
 
-class UsersList {
-    
-  public enum Error : Swift.Error {
-        
-        case connectivity
-        case invalidResponse
-    }
-    
-    
-    let url : URL
-    let client : HTTPClient
-    
-    init(url: URL, client: HTTPClient) {
-        self.url = url
-        self.client = client
-    }
-    
-    func load () async throws -> [UsersList] {
-        
-        do {
-          _ =  try await client.get(from: url)}
-        catch  {
-            throw Error.connectivity
-        
-        }
-        return []
-    }
-        
-}
