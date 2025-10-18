@@ -27,6 +27,7 @@
 		003455772EA355BB00EC5CF6 /* UserList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UserList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		003455842EA355BC00EC5CF6 /* UserListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UserListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0034558E2EA355BC00EC5CF6 /* UserListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UserListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		003455E32EA36EB400EC5CF6 /* UserList.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UserList.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +76,7 @@
 		0034556E2EA355BB00EC5CF6 = {
 			isa = PBXGroup;
 			children = (
+				003455E32EA36EB400EC5CF6 /* UserList.xctestplan */,
 				003455792EA355BB00EC5CF6 /* UserList */,
 				003455872EA355BC00EC5CF6 /* UserListTests */,
 				003455912EA355BC00EC5CF6 /* UserListUITests */,
