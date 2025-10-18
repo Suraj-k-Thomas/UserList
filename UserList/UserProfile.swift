@@ -7,16 +7,17 @@
 
 import Foundation
 
-public struct USerProfile {
-    let id: UUID
-        let name: String
-        let company: String
-        let username: String
-        let email: String
-        let address: String
-        let zip: String
-        let state: String
-        let country: String
-        let phone: String
-        let photo: String
+public struct USerProfile : Equatable , Codable , Identifiable{
+    public   let id: UUID
+    public   let name: String
+    public   let company: String
+    public   let username: String
+    public   let email: String
+    public   let address: String
+    public   let zip: String
+    public   let state: String
+    public   let country: String
+    public   let phone: String
+    public   let photo: String
 }
+

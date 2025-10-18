@@ -15,6 +15,8 @@ protocol HTTPClient {
 
 class UsersList {
     
+    
+    
     public enum Error : Swift.Error {
         
         case connectivity
@@ -30,14 +32,16 @@ class UsersList {
         self.client = client
     }
     
-    func load () async throws -> [UsersList] {
+    func load () async throws -> [USerProfile] {
         
         do {
-            let (_, response) = try await client.get(from: url)
+            let (data, response) = try await client.get(from: url)
             
             guard response.statusCode == 200 else {
                 throw Error.invalidResponse
             }
+            return try JSONDecoder().decode([USerProfile].self, from: data)
+            
         }
         catch let error as UsersList.Error {
             
@@ -47,8 +51,9 @@ class UsersList {
             
             throw Error.connectivity
         }
-        return  []
     }}
+
+
 
 
 

@@ -34,7 +34,6 @@ class UserListTests :XCTestCase{
         let (sut , client) = makesut()
         await client.enqueue(response: .failure(NSError(domain: "error", code: 0, userInfo: nil)))
         
-        
         do {
           _ =  try await sut.load()
             
@@ -67,6 +66,54 @@ class UserListTests :XCTestCase{
             XCTFail("error")
         }
         
+    }
+    
+    func  test_EmptyResponseon200HttpUrlResponse () async {
+        
+        let url = URL(string: "https://Aurl.com")!
+        let (sut , client ) = makesut(url: url)
+        let validjson = try! JSONSerialization.data(withJSONObject: [])
+        let validresponse = HTTPURLResponse(url: url,
+                                              statusCode: 200,
+                                              httpVersion: nil,
+                                              headerFields: nil)!
+       await client.enqueue(response: .success(validjson, validresponse))
+        let items = try? await sut.load()
+        XCTAssertEqual(items, [])
+        
+    }
+    
+    func test_ValidDataon200HttpStatusCode () async {
+        
+        
+        let url = URL(string: "https://Aurl.com")!
+        let (sut , client) = makesut(url: url)
+        
+        let item = USerProfile(id: UUID() , name: "someName", company: "someCompany", username: "someUSername", email: "https://someemail.com", address: "someaddress", zip: "12345", state: "somestate", country: "somecountry", phone:"1234587656" , photo: "https://somephoto.com")
+        
+        let json = [[
+            "id": item.id.uuidString,
+                "name": item.name,
+                "company": item.company,
+                "username": item.username,
+                "email": item.email,
+                "address":item.address,
+                "zip": item.zip,
+                "state": item.state,
+                "country": item.country,
+                "phone": item.phone,
+                "photo": item.photo
+            ]]
+        
+        
+        let data = try! JSONSerialization.data(withJSONObject: json)
+        let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        
+        await client.enqueue(response: .success(data, response))
+        
+        let items = try? await sut.load()
+        
+        XCTAssertEqual([item], items)
     }
     
     
