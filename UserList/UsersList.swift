@@ -42,14 +42,17 @@ class UsersList {
             }
             return try JSONDecoder().decode([USerProfile].self, from: data)
             
+        }catch let error as URLError{
+            throw Error.connectivity
         }
+        
         catch let error as UsersList.Error {
             
             throw error
         }
         catch {
             
-            throw Error.connectivity
+            throw Error.invalidResponse
         }
     }}
 
