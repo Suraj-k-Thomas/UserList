@@ -3,7 +3,7 @@
 //  UserList
 //
 //  Created by Suraj  Thomas on 18/10/25.
-//
+// This is the class that calls the api 
 
 import Foundation
 
@@ -13,7 +13,13 @@ protocol HTTPClient {
 }
 
 
-class UsersList {
+
+public protocol UsersListAPiProtocol {
+    func load() async throws -> [USerProfile]
+}
+
+
+class UsersList : UsersListAPiProtocol{
     
     
     
@@ -43,6 +49,7 @@ class UsersList {
             return try JSONDecoder().decode([USerProfile].self, from: data)
             
         }catch let error as URLError{
+            print("Network Rrror", error)
             throw Error.connectivity
         }
         
