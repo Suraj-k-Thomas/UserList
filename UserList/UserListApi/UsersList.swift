@@ -14,7 +14,7 @@ protocol HTTPClient {
 
 
 
-public protocol UsersListAPiProtocol {
+ protocol UsersListAPiProtocol {
     func load() async throws -> [USerProfile]
 }
 

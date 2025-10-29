@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct USerProfile : Equatable , Codable , Identifiable , Hashable{
+ struct USerProfile : Equatable , Codable , Identifiable , Hashable{
     public   let id: Int
     public   let name: String
     public   let company: String

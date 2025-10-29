@@ -92,7 +92,7 @@ class UserListTests :XCTestCase{
         let item = USerProfile(id: 1 , name: "someName", company: "someCompany", username: "someUSername", email: "https://someemail.com", address: "someaddress", zip: "12345", state: "somestate", country: "somecountry", phone:"1234587656" , photo: "https://somephoto.com")
         
         let json = [[
-            "id": item.id,
+                "id": item.id,
                 "name": item.name,
                 "company": item.company,
                 "username": item.username,
