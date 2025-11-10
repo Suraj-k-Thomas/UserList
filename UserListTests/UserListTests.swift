@@ -3,7 +3,7 @@
 //  UserListTests
 //
 //  Created by Suraj  Thomas on 18/10/25.
-// unit test suite
+// Unit Test Suite
 
 import Testing
 import XCTest
